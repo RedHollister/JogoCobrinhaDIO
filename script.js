@@ -42,10 +42,18 @@ function update(event){
 
 
 function iniciarJogo(){
+
     if(snake[0].x > 15 * box && direction == "right") snake[0].x = 0;
     if(snake[0].x < 0 && direction == "left") snake[0].x = 16 * box;
     if(snake[0].y > 15 * box && direction == "down") snake[0].y = 0;
-    if(snake[0].y < 0 && direction == "up") snake[0].y = 16 * box;
+    if(snake[0].y < 0 && direction == "up") snake[0].y = 16 * box;   //Out of Bonds
+
+    for(i = 1; i < snake.length; i++){
+        if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){ //Se a posição X e Y da cabeça [0] da cobra for igual a posição X e Y de qualquer parte do corpo da cobra...
+            clearInterval(jogo) //Faz com que o intervalo de atualização pare, ou seja, parando o jogo
+            alert('Game Over :(')
+        }
+    }
 
     criarBG();
     criarCobrinha();
@@ -59,7 +67,14 @@ function iniciarJogo(){
     if(direction == "up") snakeY -= box; //Diminui para "se mover pra cima"
     if(direction == "down") snakeY += box; //Diminui para "se mover pra baixo"
 
-    snake.pop();
+    if(snakeX != food.x || snakeY != food.y){ //U
+        snake.pop(); //A cobra só perderá o corpo se caso não comer a comida, nesse caso foi feito a lógica da mentira
+    }
+    else{food.x = Math.floor(Math.random() * 15 + 1) * box;
+        food.y = Math.floor(Math.random() * 15 + 1) * box;
+
+    }
+
 
     let newHead = {
         x: snakeX,
