@@ -8,6 +8,10 @@ snake[0] = { //Deve ter colocado a cobrinha na posição central da caixa
 }
 
 let direction = "right";
+let food = {
+    x: Math.floor(Math.random() * 15 + 1) * box, //Geração de número aleatório
+    y: Math.floor(Math.random() * 15 + 1) * box //Pra X e Y
+}
 
 function criarBG(){ //Cria a caixa do jogo...
     context.fillStyle = "lightgreen"; //Com cor verde claro
@@ -19,6 +23,11 @@ function criarCobrinha(){ //Após dada a posição inicial da cobrinha...
         context.fillStyle = "green"; //Tendo essa "caixa" da cobra de cor verde
         context.fillRect(snake[i].x, snake[i].y, box, box); //Sua posição inicial depende do vetor snake,
     }
+}
+
+function drawFood(){
+    context.fillStyle = "blue";
+    context.fillRect(food.x, food.y, box, box);
 }
 
 document.addEventListener('keydown', update);
@@ -40,6 +49,7 @@ function iniciarJogo(){
 
     criarBG();
     criarCobrinha();
+    drawFood();
 
     let snakeX = snake[0].x; 
     let snakeY = snake[0].y;
