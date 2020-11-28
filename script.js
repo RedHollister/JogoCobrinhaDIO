@@ -51,7 +51,7 @@ function iniciarJogo(){
     for(i = 1; i < snake.length; i++){
         if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){ //Se a posição X e Y da cabeça [0] da cobra for igual a posição X e Y de qualquer parte do corpo da cobra...
             clearInterval(jogo) //Faz com que o intervalo de atualização pare, ou seja, parando o jogo
-            alert('Game Over :(')
+            document.getElementById("title").innerHTML = "Game Over";
         }
     }
 
